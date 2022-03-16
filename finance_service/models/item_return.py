@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, Integer, String, ChoiceType
+from sqlalchemy import Boolean, Column, Integer, String, ChoiceType, ForeignKey
 from finance_service.database import Base
 from enum import Enum
 
@@ -19,3 +19,4 @@ class Return(Base):
     order_id = Column(Integer)
     reference_id = Column(Integer)
     status = Column(Enum(Status))
+    owner_id = Column(Integer, ForeignKey("users.id"))
