@@ -7,8 +7,10 @@ class ReturnBase(BaseModel):
     reference_id = int
     status: Status
 
+
 class ReturnCreate(ReturnBase):
     pass
+
 
 class Return(ReturnBase):
     id: int
@@ -16,6 +18,7 @@ class Return(ReturnBase):
 
     class Config:
         orm_mode = True
+
 
 class UserBase(BaseModel):
     email: str
