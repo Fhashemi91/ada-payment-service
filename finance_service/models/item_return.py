@@ -1,9 +1,10 @@
-from sqlalchemy import Boolean, Column, Integer, String, ChoiceType, ForeignKey
+from sqlalchemy import Boolean, Column, Integer, String, ForeignKey, Enum
 from finance_service.database import Base
-from enum import Enum
+from sqlalchemy.orm import relationship
+import enum
 
 
-class Status(Enum):
+class Status(enum.Enum):
     new = 1
     processing = 2
     rejected = 3
@@ -19,4 +20,6 @@ class Return(Base):
     order_id = Column(Integer)
     reference_id = Column(Integer)
     status = Column(Enum(Status))
+
     owner_id = Column(Integer, ForeignKey("users.id"))
+    owner = relationship("User", back_populates="returns")
