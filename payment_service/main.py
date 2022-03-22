@@ -34,7 +34,7 @@ def list_payment(user_id: str, skip: int = 0, limit: int = 100, db: Session = De
 
 @app.get("/pay/{payment_id}", response_class=HTMLResponse)
 def pay(payment_id: int, db: Session = Depends(get_db)):
-    payment = crud.get_payment(db=db, payment_id=payment_id)
+    payment = crud.get_payment(db=db, payment_id=payment_id, status=Status.registered)
 
     if not payment:
         return f"<center><h1>Invalid payment id {payment_id}</h1></center>"

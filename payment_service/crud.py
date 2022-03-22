@@ -16,8 +16,8 @@ def get_or_create(db: Session, model, **kwargs):
     return instance
 
 
-def get_payment(db: Session, payment_id: int):
-    return db.query(Payment).filter_by(id=payment_id).first()
+def get_payment(db: Session, payment_id: int, status: Status):
+    return db.query(Payment).filter_by(id=payment_id, status=status).first()
 
 def update_payment_status(db: Session, payment_id: int, status: Status):
     payment = db.query(Payment).filter_by(id=payment_id).first()
