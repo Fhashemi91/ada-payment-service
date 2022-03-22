@@ -1,37 +1,34 @@
 from pydantic import BaseModel
-from finance_service.models.item_return import Status
+from payment_service.models.payment import Status
 
 
-class ReturnBase(BaseModel):
+class PaymentBase(BaseModel):
     order_id: int
-    reference_id = int
-    status: Status
+    reference_id: int
+    amount: int
 
 
-class ReturnCreate(ReturnBase):
+class PaymentCreate(PaymentBase):
     pass
 
 
-class Return(ReturnBase):
+class Payment(PaymentBase):
     id: int
-    owner_id: int
+    user_id: int
+    status: Status
 
     class Config:
         orm_mode = True
 
 
 class UserBase(BaseModel):
-    email: str
-
-
-class UserCreate(UserBase):
-    password: str
+    id: str
 
 
 class User(UserBase):
     id: int
     is_active: bool
-    items: list[Return] = []
+    payments: list[Payment] = []
 
     class Config:
         orm_mode = True

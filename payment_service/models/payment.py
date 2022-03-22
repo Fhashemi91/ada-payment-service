@@ -1,25 +1,24 @@
 from sqlalchemy import Boolean, Column, Integer, String, ForeignKey, Enum
-from finance_service.database import Base
+from payment_service.database import Base
 from sqlalchemy.orm import relationship
 import enum
 
 
 class Status(enum.Enum):
-    new = 1
-    processing = 2
+    successful = 1
+    cancelled = 2
     rejected = 3
-    accepted = 4
-    refund = 5
-    processed = 6
+    refund = 4
 
 
-class Return(Base):
-    __tablename__ = "returns"
+class Payment(Base):
+    __tablename__ = "payments"
 
     id = Column(Integer, primary_key=True, index=True)
     order_id = Column(Integer)
     reference_id = Column(Integer)
     status = Column(Enum(Status))
+    amount = Column(Integer)
 
-    owner_id = Column(Integer, ForeignKey("users.id"))
-    owner = relationship("User", back_populates="returns")
+    user_id = Column(Integer, ForeignKey("users.id"))
+    user = relationship("User", back_populates="payments")

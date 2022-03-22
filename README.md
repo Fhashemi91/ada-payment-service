@@ -1,1 +1,1 @@
-# finance-service
+# payment-service
