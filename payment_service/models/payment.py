@@ -5,6 +5,7 @@ import enum
 
 
 class Status(enum.Enum):
+    registered = 0
     successful = 1
     cancelled = 2
     rejected = 3

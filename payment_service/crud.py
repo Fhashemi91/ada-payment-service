@@ -15,6 +15,20 @@ def get_or_create(db: Session, model, **kwargs):
 
     return instance
 
+
+def get_payment(db: Session, payment_id: int):
+    return db.query(Payment).filter_by(id=payment_id).first()
+
+def update_payment_status(db: Session, payment_id: int, status: Status):
+    payment = db.query(Payment).filter_by(id=payment_id).first()
+    if not payment:
+        # FIXME
+        raise Exception("payment not found!")
+
+    payment.status = status
+    db.add(payment)
+    db.commit()
+
 def get_payments(db: Session, user_id: str, skip: int = 0, limit: int = 100):
     return db.query(Payment).filter_by(user_id=user_id).offset(skip).limit(limit).all()
 
@@ -22,7 +36,7 @@ def get_payments(db: Session, user_id: str, skip: int = 0, limit: int = 100):
 def register_payment(db: Session, info: schemas.PaymentCreate, user_id: int):
     user = get_or_create(db, User, id=user_id)
 
-    payment = Payment(**info.dict(), status=Status.successful, user_id=user.id)
+    payment = Payment(**info.dict(), status=Status.registered, user_id=user.id)
     db.add(payment)
     db.commit()
     db.refresh(payment)
