@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "finance_service"
+name = "payment_service"
 version = "0.1.0"
 description = ""
 authors = ["Fatemeh Hashemi <f.hashemi91@gmail.com>"]
