@@ -21,7 +21,7 @@ def get_db():
         db.close()
 
 
-@app.post("/payments/{user_id}/payment/", response_model=schemas.Payment)
+@app.post("/payments/{user_id}/payment", response_model=schemas.Payment)
 def register_payment(
     user_id: str, info: schemas.PaymentCreate, db: Session = Depends(get_db)
 ):
@@ -58,7 +58,7 @@ def pay(payment_id: int, db: Session = Depends(get_db)):
     </html>
     """
 
-@app.get("/pay/{payment_id}/success/", response_class=HTMLResponse)
+@app.get("/pay/{payment_id}/success", response_class=HTMLResponse)
 def update_payments(payment_id: int, db: Session = Depends(get_db)):
     submit_message("payment update requested", payment_id=str(payment_id))
     

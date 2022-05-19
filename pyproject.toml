@@ -10,6 +10,7 @@ SQLAlchemy = "^1.4.32"
 fastapi = "^0.75.0"
 alembic = "^1.7.7"
 uvicorn = "^0.17.6"
+google-cloud-pubsub = "^2.12.1"
 
 [tool.poetry.dev-dependencies]
 black = "^22.1.0"
